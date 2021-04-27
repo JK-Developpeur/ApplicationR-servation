@@ -1,0 +1,40 @@
+﻿@model List<EditUsersRoleViewModel>
+   @{ ViewData["Title"] = "EditUsersRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="my-2 text-center col-12 ">
+        <h2 class="pt-3 text-info"> Edit Users Role </h2>
+        <hr class="col-3"/>
+    </div>
+    <form class="mx-lg-auto my-5 w-50 " method="post">
+        <div class="my-5">
+            <div class="card">
+                <div class="card-header">
+                    <span>Add or Remove Users from this Role</span>
+                    <input hidden disabled value="Id: @ViewBag.RoleId" class="form-control" />
+                </div>
+                <div class="card-body">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        var uniqueName = "User" + i;
+                        <div class="form-check m-1">
+                            <input hidden asp-for="@Model[i].UserId" />
+                            <input hidden asp-for="@Model[i].UserName" />
+                            <input asp-for="@Model[i].IsSelected" id="@uniqueName" class="form-check-input" />
+                            <label for="@uniqueName" class="form-check-label">@Model[i].UserName</label>
+                        </div>
+
+                    }
+
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-warning text-black-50">Save</button>
+                    <a asp-action="Edit" asp-route-id="@ViewBag.RoleId" class="btn btn-secondary mx-2">Back</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

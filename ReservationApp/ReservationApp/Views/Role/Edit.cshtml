@@ -1,0 +1,53 @@
+﻿@model Role
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <div class=" my-2 text-center col-12">
+        <h2 class="text-info"> Edit Role Details </h2>
+        <hr class="col-3" />
+    </div>
+        <form class="mx-lg-auto my-5 w-50" method="post">
+        <label hidden asp-for="Id"></label>
+        <input hidden class="form-control" disabled asp-for="Id">
+
+        <div class="form-group">
+            <label class="text-info" asp-for="Name"></label>
+            <input class="form-control" asp-for="Name">
+            <span asp-validation-for="Name" class="small text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-warning text-black-50">Update</button>
+        </div>
+
+        <div>
+            <div class="card" style=" margin:auto">
+                <div class="card-body text-center">
+                    <h5 class="card-title">List Users</h5>
+
+                    @if (Model.Users.Count == 0)
+                    {
+                        <p class="card-text">Any Users</p>
+                    }
+                    else
+                    {
+                        <p class="card-text">
+                            @foreach (string user in Model.Users)
+                            {
+                                @user <br />
+                            }
+                        </p>
+                    }
+                    <div>
+                        <a class="text-black-50" asp-action="EditUsersRole" asp-route-RoleId="@Model.Id">Edit Users</a> |
+                        <a class="text-black-50" asp-action="Index">Back to list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text text-danger" asp-validation-summary="All"></div>
+    </form>
+</div>
